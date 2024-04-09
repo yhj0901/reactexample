@@ -19,38 +19,42 @@ const RadioButtonComponent = (props: Props) => {
 
   return (
     <div className="flex-col w-full m-[20px]">
-      <button
-        className="flex items-center mb-[30px]"
-        onClick={() => router.back()}
-      >
-        <Image
-          src="/images/window/back-48.png"
-          alt="radio-button"
-          height={30}
-          width={30}
-        />
-        <p>뒤로가기</p>
-      </button>
-      {options.map((option, index) => (
-        <div key={index} className="m-[10px] gap-4">
-          <input
-            id={`radio-button-${index}`}
-            className="peer"
-            type="radio"
-            value={option}
-            checked={selected === option}
-            onChange={handleChange}
-            name="radio-button-group"
+      <header id="header">
+        <button
+          className="flex items-center mb-[30px]"
+          onClick={() => router.back()}
+        >
+          <Image
+            src="/images/window/back-48.png"
+            alt="radio-button"
+            height={30}
+            width={30}
           />
-          <label
-            htmlFor={`radio-button-${index}`}
-            className="mx-[10px] cursor-pointer peer-checked:text-red-500"
-          >
-            {option}
-          </label>
-        </div>
-      ))}
-      <p className="mt-[20px]">Selected Option: {selected}</p>
+          <p>뒤로가기</p>
+        </button>
+      </header>
+      <main id="main">
+        {options.map((option, index) => (
+          <section key={index} className="m-[10px] gap-4">
+            <input
+              id={`radio-button-${index}`}
+              className="peer"
+              type="radio"
+              value={option}
+              checked={selected === option}
+              onChange={handleChange}
+              name="radio-button-group"
+            />
+            <label
+              htmlFor={`radio-button-${index}`}
+              className="mx-[10px] cursor-pointer peer-checked:text-red-500"
+            >
+              {option}
+            </label>
+          </section>
+        ))}
+        <p className="mt-[20px]">Selected Option: {selected}</p>
+      </main>
     </div>
   );
 };

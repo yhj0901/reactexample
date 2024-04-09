@@ -63,66 +63,78 @@ const TodoDay = () => {
 
   return (
     <div>
-      <button className="flex items-center mb-[30px]" onClick={() => router.back()}>
-        <Image
-          src="/images/window/back-48.png"
-          alt="radio-button"
-          height={30}
-          width={30}
-        />
-        <p>뒤로가기</p>
-      </button>
-      {stateText.map((item, index) => (
-        <div
-          key={index}
-          className={cn(
-            'relative flex flex-col mt-6 text-gray-700 bg-white shadow-md',
-            'bg-clip-border rounded-xl w-96'
-          )}
+      <header id="header">
+        <button
+          className="flex items-center mb-[30px]"
+          onClick={() => router.back()}
         >
-          <div className="p-6">
-            <h5
-              className={cn(
-                'block mb-2 font-sans text-xl antialiased',
-                'font-semibold leading-normal text-blue-gray-900'
-              )}
-            >
-              {item}
-            </h5>
-            <div>
-              <input
-                id={`inputValue-${item}`}
-                type="text"
-                className="border-solid border-[1px] border-[#000]"
-                value={inputValues[item] || ''} // 특정 item의 값을 사용
-                onChange={(e) => handleInputChange(item, e)}
-              />
-              <button onClick={() => handleAddCard(item)} className="m-[10px]">
-                추가
-              </button>
-            </div>
-          </div>
-          {todoItems.length !== 0 &&
-            todoItems
-              .filter((card) => card.todoType === item)
-              .map((card, index) => (
-                <div
-                  key={index}
-                  className="ml-[25px] mb-[25px] flex justify-between"
+          <Image
+            src="/images/window/back-48.png"
+            alt="radio-button"
+            height={30}
+            width={30}
+          />
+          <p>뒤로가기</p>
+        </button>
+      </header>
+      <main id="main">
+        {stateText.map((item, index) => (
+          <section
+            id="cards"
+            key={index}
+            className={cn(
+              'relative flex flex-col mt-6 text-gray-700 bg-white shadow-md',
+              'bg-clip-border rounded-xl w-96'
+            )}
+          >
+            <article id="card" className="p-6">
+              <h5
+                className={cn(
+                  'block mb-2 font-sans text-xl antialiased',
+                  'font-semibold leading-normal text-blue-gray-900'
+                )}
+              >
+                {item}
+              </h5>
+              <section id="todoInput">
+                <input
+                  id={`inputValue-${item}`}
+                  type="text"
+                  className="border-solid border-[1px] border-[#000]"
+                  value={inputValues[item] || ''} // 특정 item의 값을 사용
+                  onChange={(e) => handleInputChange(item, e)}
+                />
+                <button
+                  onClick={() => handleAddCard(item)}
+                  className="m-[10px]"
                 >
-                  <p className="">
-                    {index + 1} : {card.todoText}
-                  </p>
-                  <button
-                    className="mr-[30px]"
-                    onClick={() => handleDeleteCard(card.todoType, index)}
+                  추가
+                </button>
+              </section>
+            </article>
+            {todoItems.length !== 0 &&
+              todoItems
+                .filter((card) => card.todoType === item)
+                .map((card, index) => (
+                  <section
+                    id="todoItem"
+                    key={index}
+                    className="ml-[25px] mb-[25px] flex justify-between"
                   >
-                    삭제
-                  </button>
-                </div>
-              ))}
-        </div>
-      ))}
+                    <p className="">
+                      {index + 1} : {card.todoText}
+                    </p>
+                    <button
+                      className="mr-[30px]"
+                      onClick={() => handleDeleteCard(card.todoType, index)}
+                    >
+                      삭제
+                    </button>
+                  </section>
+                ))}
+          </section>
+        ))}
+      </main>
     </div>
   );
 };

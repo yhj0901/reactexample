@@ -28,37 +28,41 @@ const CheckBoxComponent = (props: Props) => {
   };
   return (
     <div className="flex-col w-full m-[20px]">
-      <button
-        className="flex items-center mb-[30px]"
-        onClick={() => router.back()}
-      >
-        <Image
-          src="/images/window/back-48.png"
-          alt="radio-button"
-          height={30}
-          width={30}
-        />
-        <p>뒤로가기</p>
-      </button>
-      {options.map((option, index) => (
-        <div key={index} className="m-[10px] gap-4">
-          <input
-            id={`checkbox-${index}`}
-            className={cn('peer')}
-            type="checkbox"
-            value={option}
-            name="checkbox-group"
-            onChange={handleChange}
+      <header id="header">
+        <button
+          className="flex items-center mb-[30px]"
+          onClick={() => router.back()}
+        >
+          <Image
+            src="/images/window/back-48.png"
+            alt="radio-button"
+            height={30}
+            width={30}
           />
-          <label
-            htmlFor={`checkbox-${index}`}
-            className="mx-[10px] cursor-pointer peer-checked:text-red-500"
-          >
-            {option}
-          </label>
-        </div>
-      ))}
-      <p className="mt-[20px]">Selected Options: {selectText}</p>
+          <p>뒤로가기</p>
+        </button>
+      </header>
+      <main id="main">
+        {options.map((option, index) => (
+          <section key={index} className="m-[10px] gap-4">
+            <input
+              id={`checkbox-${index}`}
+              className={cn('peer')}
+              type="checkbox"
+              value={option}
+              name="checkbox-group"
+              onChange={handleChange}
+            />
+            <label
+              htmlFor={`checkbox-${index}`}
+              className="mx-[10px] cursor-pointer peer-checked:text-red-500"
+            >
+              {option}
+            </label>
+          </section>
+        ))}
+        <p className="mt-[20px]">Selected Options: {selectText}</p>
+      </main>
     </div>
   );
 };
