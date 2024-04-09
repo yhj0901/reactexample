@@ -3,8 +3,9 @@
 import { todoStateText, todoList } from '@/lib/recoil/Recoil';
 import { useRecoilValue, useRecoilState } from 'recoil';
 import cn from 'clsx';
-import { use, useEffect, useState } from 'react';
-import { todo } from 'node:test';
+import { useEffect, useState } from 'react';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 type TodoDayProps = {
   todoType: string;
@@ -12,6 +13,7 @@ type TodoDayProps = {
 };
 
 const TodoDay = () => {
+  const router = useRouter();
   const stateText = useRecoilValue(todoStateText);
   const [todoListText] = useRecoilState(todoList);
   const [todoItems, setTodoItems] = useState<TodoDayProps[]>([]);
@@ -61,6 +63,15 @@ const TodoDay = () => {
 
   return (
     <div>
+      <button className="flex items-center mb-[30px]" onClick={() => router.back()}>
+        <Image
+          src="/images/window/back-48.png"
+          alt="radio-button"
+          height={30}
+          width={30}
+        />
+        <p>뒤로가기</p>
+      </button>
       {stateText.map((item, index) => (
         <div
           key={index}

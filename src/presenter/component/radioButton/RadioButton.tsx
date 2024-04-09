@@ -1,12 +1,15 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 interface Props {
   options: string[];
 }
 
 const RadioButtonComponent = (props: Props) => {
+  const router = useRouter();
   const { options } = props;
   const [selected, setSelected] = useState('');
 
@@ -16,6 +19,18 @@ const RadioButtonComponent = (props: Props) => {
 
   return (
     <div className="flex-col w-full m-[20px]">
+      <button
+        className="flex items-center mb-[30px]"
+        onClick={() => router.back()}
+      >
+        <Image
+          src="/images/window/back-48.png"
+          alt="radio-button"
+          height={30}
+          width={30}
+        />
+        <p>뒤로가기</p>
+      </button>
       {options.map((option, index) => (
         <div key={index} className="m-[10px] gap-4">
           <input

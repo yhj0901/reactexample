@@ -29,6 +29,18 @@ const todoComponent = () => {
 
   return (
     <div className="">
+      <button
+        className="flex items-center mb-[30px]"
+        onClick={() => router.back()}
+      >
+        <Image
+          src="/images/window/back-48.png"
+          alt="radio-button"
+          height={30}
+          width={30}
+        />
+        <p>뒤로가기</p>
+      </button>
       <h1 className="text-center">TodoList를 어떻게 이용할 계획입니까?</h1>
       <div className="text-center">해당하는 것을 모두 선택하세요.</div>
       <div className="mt-[25px] ">

@@ -3,12 +3,15 @@
 import { checkBoxState, checkBoxStateText } from '@/lib/recoil/Recoil';
 import cn from 'clsx';
 import { useRecoilState, useRecoilValue } from 'recoil';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 interface Props {
   options: string[];
 }
 
 const CheckBoxComponent = (props: Props) => {
+  const router = useRouter();
   const { options } = props;
   // const [selected, setSelected] = useState<string[]>([]);
   const [checkBoxText, setCheckBoxText] = useRecoilState(checkBoxState);
@@ -25,6 +28,18 @@ const CheckBoxComponent = (props: Props) => {
   };
   return (
     <div className="flex-col w-full m-[20px]">
+      <button
+        className="flex items-center mb-[30px]"
+        onClick={() => router.back()}
+      >
+        <Image
+          src="/images/window/back-48.png"
+          alt="radio-button"
+          height={30}
+          width={30}
+        />
+        <p>뒤로가기</p>
+      </button>
       {options.map((option, index) => (
         <div key={index} className="m-[10px] gap-4">
           <input
