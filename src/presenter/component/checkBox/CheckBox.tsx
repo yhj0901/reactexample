@@ -17,6 +17,11 @@ const CheckBoxComponent = (props: Props) => {
   const [exampleState, setExampleState] = useState<string[]>([]);
   const [checkBoxText, setCheckBoxText] = useRecoilState(checkBoxState);
 
+  // next.js 에서 recoil을 사용해서 localStorage에 저장된 값을 가져올 때
+  // 서버 사이드 랜더링 할때 window 객체가 없어서 hydration할때 모든 데이터가 다 가져와야 하기 때문에
+  // 이 문제를 해결하기 위해 먼저 hydration 과정에서 [] 값으로 초기화를 해주고
+  // 이후 localStorage에 저장된 값을 가져와서 set해주는 방식으로 해결
+  // 참고 : https://blog.haenu.com/10
   useEffect(() => {
     setExampleState(checkBoxText);
   }, [checkBoxText]);
