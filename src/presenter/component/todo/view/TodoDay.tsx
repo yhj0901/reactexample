@@ -1,7 +1,7 @@
 'use client';
 
-import { todoStateText, todoList } from '@/lib/recoil/Recoil';
-import { useRecoilValue, useRecoilState } from 'recoil';
+import { todoStateText } from '@/lib/recoil/Recoil';
+import { useRecoilValue } from 'recoil';
 import cn from 'clsx';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
@@ -15,14 +15,10 @@ type TodoDayProps = {
 const TodoDay = () => {
   const router = useRouter();
   const stateText = useRecoilValue(todoStateText);
-  const [todoListText] = useRecoilState(todoList);
-  const [todoItems, setTodoItems] = useState<TodoDayProps[]>([]);
-  const [inputValues, setInputValues] = useState<{ [key: string]: string }>({});
 
-  useEffect(() => {
-    console.log('todoListText', todoListText);
-    console.log('todoItems', todoItems);
-  }, [todoListText, todoItems]);
+  const [todoItems, setTodoItems] = useState<TodoDayProps[]>([]);
+  // todoList의 타입에 따라 input 텍스트의 변경사항을 설정할수있게 키를 추가
+  const [inputValues, setInputValues] = useState<{ [key: string]: string }>({});
 
   const handleInputChange = (
     item: string,

@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { radioButtonState } from '@/lib/recoil/Recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 interface Props {
   options: string[];
@@ -11,7 +13,7 @@ interface Props {
 const RadioButtonComponent = (props: Props) => {
   const router = useRouter();
   const { options } = props;
-  const [selected, setSelected] = useState('');
+  const [selected, setSelected] = useRecoilState(radioButtonState);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelected(event.target.value);

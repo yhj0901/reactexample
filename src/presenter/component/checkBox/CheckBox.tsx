@@ -1,10 +1,11 @@
 'use client';
 
-import { checkBoxState, checkBoxStateText } from '@/lib/recoil/Recoil';
+import { checkBoxState } from '@/lib/recoil/Recoil';
 import cn from 'clsx';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 interface Props {
   options: string[];
@@ -13,9 +14,12 @@ interface Props {
 const CheckBoxComponent = (props: Props) => {
   const router = useRouter();
   const { options } = props;
-  // const [selected, setSelected] = useState<string[]>([]);
+  const [exampleState, setExampleState] = useState<string[]>([]);
   const [checkBoxText, setCheckBoxText] = useRecoilState(checkBoxState);
-  const selectText = useRecoilValue(checkBoxStateText);
+
+  useEffect(() => {
+    setExampleState(checkBoxText);
+  }, [checkBoxText]);
 
   // selected 배열에 값이 있으면 제거, 없으면 추가
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,6 +56,7 @@ const CheckBoxComponent = (props: Props) => {
               value={option}
               name="checkbox-group"
               onChange={handleChange}
+              checked={exampleState.includes(option)}
             />
             <label
               htmlFor={`checkbox-${index}`}
@@ -61,7 +66,15 @@ const CheckBoxComponent = (props: Props) => {
             </label>
           </section>
         ))}
-        <p className="mt-[20px]">Selected Options: {selectText}</p>
+        <p className="mt-[20px]">
+          Selected Options :
+          {exampleState.map((item, index) => (
+            <span key={index} className="ml-[10px]">
+              {item}
+              {index !== exampleState.length - 1 && ', '}
+            </span>
+          ))}
+        </p>
       </main>
     </div>
   );

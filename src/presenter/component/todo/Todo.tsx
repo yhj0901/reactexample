@@ -8,7 +8,6 @@ import { useRecoilState } from 'recoil';
 const todoComponent = () => {
   const router = useRouter();
   const [checkBoxText, setCheckBoxText] = useRecoilState(todoState);
-  const stateText = useRecoilState(todoState);
 
   const onClickAction = () => {
     router.push('/todo/todoDay');
@@ -58,7 +57,12 @@ const todoComponent = () => {
               height={25}
             />
             <div className="mr-[200px]">개인</div>
-            <input type="checkbox" onChange={handleChange} value="개인" />
+            <input
+              type="checkbox"
+              onChange={handleChange}
+              value="개인"
+              checked={checkBoxText.includes('개인')}
+            />
           </article>
           <article className="flex gap-x-[20px] items-center mb-[20px] border-solid border-[#dc4c3e] border-[1px] rounded-[5px] p-[10px] w-[350px] h-[70px]">
             <Image
@@ -68,7 +72,12 @@ const todoComponent = () => {
               height={25}
             />
             <div className="mr-[200px]">직장</div>
-            <input type="checkbox" onChange={handleChange} value="직장" />
+            <input
+              type="checkbox"
+              onChange={handleChange}
+              value="직장"
+              checked={checkBoxText.includes('직장')}
+            />
           </article>
           <article className="flex gap-x-[20px] items-center mb-[20px] border-solid border-[#dc4c3e] border-[1px] rounded-[5px] p-[10px] w-[350px] h-[70px]">
             <Image
@@ -78,7 +87,12 @@ const todoComponent = () => {
               height={25}
             />
             <div className="mr-[200px]">교육</div>
-            <input type="checkbox" onChange={handleChange} value="교육" />
+            <input
+              type="checkbox"
+              onChange={handleChange}
+              value="교육"
+              checked={checkBoxText.includes('교육')}
+            />
           </article>
         </section>
         <button
