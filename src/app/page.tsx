@@ -15,9 +15,15 @@ export default function Home() {
           <h1>체크박스</h1>
         </Link>
       </div>
-      <div className=" border-solid border-[1px] bg-red-500 p-[5px] text-center">
+      <div className=" border-solid border-[1px] bg-red-500 p-[5px] mb-[25px] text-center">
         <Link href={'/todo'}>
           <h1>TodoList</h1>
+        </Link>
+      </div>
+
+      <div className=" border-solid border-[1px] bg-red-500 p-[5px] text-center">
+        <Link href={'/auth'}>
+          <h1>Google 로그인</h1>
         </Link>
       </div>
     </div>

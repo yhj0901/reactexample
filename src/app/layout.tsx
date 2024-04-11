@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import RecoilRootProvider from './recoilRootProvider';
 import cn from 'clsx';
+import AuthContext from './context/AuthContext';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -22,7 +23,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cn('flex w-full h-full justify-center mt-[30px]')}>
-        <RecoilRootProvider>{children}</RecoilRootProvider>
+        <AuthContext>
+          <RecoilRootProvider>{children}</RecoilRootProvider>
+        </AuthContext>
       </body>
     </html>
   );
