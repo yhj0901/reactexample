@@ -1,6 +1,7 @@
 'use client';
 
 import { signIn, signOut, useSession } from 'next-auth/react';
+import Image from 'next/image';
 
 const AuthPage = () => {
   const { data: session, status } = useSession();
@@ -9,9 +10,16 @@ const AuthPage = () => {
       {session ? (
         <div>
           <button onClick={() => signOut()}>SignOut</button>
-          <p>
-            status: {status} | data: {session.user?.email}
-          </p>
+          <p>status: {status}</p>
+          <p>email: {session.user?.email}</p>
+          <p>name: {session.user?.name}</p>
+          <p>expires: {session.expires}</p>
+          <Image
+            src={session.user?.image ?? ''}
+            alt="user-image"
+            width={30}
+            height={30}
+          />
         </div>
       ) : (
         <div>
