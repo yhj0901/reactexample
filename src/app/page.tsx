@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export default function Home() {
   return (
-    <div className="text-[18px]">
+    <div className="text-[18px] m-[20px]">
       <div className=" border-solid border-[1px] bg-red-500 p-[5px] mb-[25px] text-center">
         <Link href={'/radioButton'}>
           <h1>라디오버튼</h1>

@@ -4,7 +4,8 @@ import './globals.css';
 import RecoilRootProvider from './recoilRootProvider';
 import cn from 'clsx';
 import AuthContext from './context/AuthContext';
-import Header from './header/page';
+import HeaderNavBar from '@/presenter/component/headerNavBar/HeaderNavBar';
+import LeftSideBarMenu from '@/presenter/component/LeftSidebarMenu/LeftSidebarMenu';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -23,15 +24,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn('flex w-full h-full justify-center')}>
-        <div className="flex-col flex-[1]">
-          <Header />
-        </div>
-        <div className="flex-col flex-[3] mt-[20px]">
-          <AuthContext>
-            <RecoilRootProvider>{children}</RecoilRootProvider>
-          </AuthContext>
-        </div>
+      <body className={cn('flex flex-col w-auto h-full justify-center')}>
+        <RecoilRootProvider>
+          <HeaderNavBar />
+          <div className="container flex flex-row">
+            <aside className="sidebar">
+              <LeftSideBarMenu />
+            </aside>
+            <div className="flex flex-row">
+              <AuthContext>{children}</AuthContext>
+            </div>
+          </div>
+        </RecoilRootProvider>
       </body>
     </html>
   );

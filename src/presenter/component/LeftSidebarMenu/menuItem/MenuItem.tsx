@@ -1,52 +1,82 @@
-import Link from 'next/link';
-import React, { useState } from 'react';
+'use client';
+
+import React, { useEffect, useCallback, useState } from 'react';
 import { MenuData } from '../LeftSidebarMenu';
 import Image from 'next/image';
 import cn from 'clsx';
+import { useRouter } from 'next/navigation';
 
 type MenuItemProps = {
   item: MenuData;
 };
 
 const MenuItem = (props: MenuItemProps) => {
-  const [isOpen, setIsOpen] = useState(false);
   const { item } = props;
+  const [data, setData] = useState<MenuData>(item);
 
-  const toggleSubMenu = () => {
-    setIsOpen(!isOpen);
-  };
+  // 세션 스토리지에서 메뉴 데이터를 가져와서 item의 title와 level을 확인해서 동일한 값을 찾아 해당 값의 isOpen을 초기 상태로 셋팅하고
+  // 해당 상태가 변경될때마다 스토리지에서 가져온 데이터를 업데이트해서 세션스토리지에 저장한다.
+  let menuData: MenuData[] = JSON.parse(
+    sessionStorage.getItem('menuData') ?? ''
+  );
 
-  console.log(item);
+  // 특정 title과 level을 가진 메뉴의 isOpen 값을 변경하는 함수
+  function updateMenuOpenStatus(menus: MenuData[], id: number): void {
+    menus.forEach((menu) => {
+      if (menu.id === id) {
+        if (menu.isOpen) {
+          menu.isOpen = false;
+        } else {
+          menu.isOpen = true;
+        }
+        setData(menu);
+      }
+      if (menu.subMenu.length > 0) {
+        updateMenuOpenStatus(menu.subMenu, id);
+      }
+    });
+  }
+
+  const router = useRouter();
+
+  const toggleSubMenu = useCallback(() => {
+    updateMenuOpenStatus(menuData, data.id);
+    sessionStorage.setItem('menuData', JSON.stringify(menuData));
+
+    if (data.link) {
+      // 깜빡임이 있어...
+      router.push(data.link);
+    }
+  }, [router, data]);
+
   return (
     <div>
       <div className="flex justify-between p-4" onClick={toggleSubMenu}>
-        <Link className="block hover:text-[#000] focus:text-[#000] " href="">
-          {item.title}
-        </Link>
-        {isOpen ? (
+        {data.title}
+        {data.isOpen ? (
           <Image
-            className={cn({
-              ['hidden']: item.subMenu?.length === 0,
+            className={cn(' aspect-square ', {
+              ['hidden']: data.subMenu?.length === 0,
             })}
             src="/images/sideMenu/arrowDown.png"
             alt="arrow-down"
-            height={10}
-            width={10}
+            height={25}
+            width={25}
           />
         ) : (
           <Image
             className={cn({
-              ['hidden']: item.subMenu?.length === 0,
+              ['hidden']: data.subMenu?.length === 0,
             })}
             src="/images/sideMenu/arrowSide.png"
             alt="arrow-side"
-            height={1}
-            width={10}
+            height={15}
+            width={5}
           />
         )}
       </div>
 
-      {isOpen && item.subMenu?.length > 0 && (
+      {data.isOpen && data.subMenu?.length > 0 && (
         <div className="pl-[20px]">
           {item.subMenu.map((subItem: any) => (
             <MenuItem item={subItem} />
