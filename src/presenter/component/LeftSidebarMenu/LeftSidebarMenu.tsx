@@ -21,9 +21,11 @@ const LeftSidebarMenu = () => {
   const [menus, setMenus] = useState<MenuData[]>([]);
 
   useEffect(() => {
+    // 세션 스토리지에 메뉴 데이터가 있으면 세션 스토리지에서 가져온다.
     if (sessionStorage.getItem('menuData') !== null) {
       setMenus(JSON.parse(sessionStorage.getItem('menuData') ?? ''));
     } else {
+      // 없으면 세로 만들어야지
       const menuData = [
         {
           id: 1,
@@ -1264,10 +1266,16 @@ const LeftSidebarMenu = () => {
   }, []);
 
   return (
+    // 왼쪽 사이드바 메뉴
     <div
-      className={cn('w-auto h-[100vh] bg-gray-500 overflow-y-auto', {
-        [`hidden`]: !isOpen,
-      })}
+      className={cn(
+        'w-[20vw] h-[100vh] bg-gray-500 overflow-y-auto transform transition-transform duration-300 ease-in-out',
+        {
+          [`hidden`]: !isOpen,
+          [`translate-x-0`]: isOpen,
+          [`-translate-x-full`]: !isOpen,
+        }
+      )}
     >
       <nav className="text-base font-semibold">
         {menus.map((item) => (

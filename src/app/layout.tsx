@@ -31,7 +31,7 @@ export default function RootLayout({
             <aside className="sidebar">
               <LeftSideBarMenu />
             </aside>
-            <div className="flex flex-row">
+            <div className="flex flex-row m-[10px]">
               <AuthContext>{children}</AuthContext>
             </div>
           </div>

@@ -12,15 +12,22 @@ type MenuItemProps = {
 
 const MenuItem = (props: MenuItemProps) => {
   const { item } = props;
+  const router = useRouter();
   const [data, setData] = useState<MenuData>(item);
 
-  // 세션 스토리지에서 메뉴 데이터를 가져와서 item의 title와 level을 확인해서 동일한 값을 찾아 해당 값의 isOpen을 초기 상태로 셋팅하고
-  // 해당 상태가 변경될때마다 스토리지에서 가져온 데이터를 업데이트해서 세션스토리지에 저장한다.
+  // sessionStorage에 저장된 메뉴 데이터를 가져옴
   let menuData: MenuData[] = JSON.parse(
     sessionStorage.getItem('menuData') ?? ''
   );
 
-  // 특정 title과 level을 가진 메뉴의 isOpen 값을 변경하는 함수
+  /**
+   * 메뉴의 isOpen 상태를 변경하는 함수
+   * id가 같은 메뉴의 isOpen 상태를 변경
+   * id가 일치 하는게 없으면 재귀함수로 다시 찾음
+   * @param menus
+   * @param id
+   */
+
   function updateMenuOpenStatus(menus: MenuData[], id: number): void {
     menus.forEach((menu) => {
       if (menu.id === id) {
@@ -30,6 +37,7 @@ const MenuItem = (props: MenuItemProps) => {
           menu.isOpen = true;
         }
         setData(menu);
+        return;
       }
       if (menu.subMenu.length > 0) {
         updateMenuOpenStatus(menu.subMenu, id);
@@ -37,8 +45,7 @@ const MenuItem = (props: MenuItemProps) => {
     });
   }
 
-  const router = useRouter();
-
+  // 메뉴 클릭시 메뉴의 isOpen 상태를 변경 후 sessionStorage에 저장
   const toggleSubMenu = useCallback(() => {
     updateMenuOpenStatus(menuData, data.id);
     sessionStorage.setItem('menuData', JSON.stringify(menuData));
@@ -51,31 +58,36 @@ const MenuItem = (props: MenuItemProps) => {
 
   return (
     <div>
-      <div className="flex justify-between p-4" onClick={toggleSubMenu}>
+      {/* 메뉴 리스트 */}
+      <div
+        className="flex justify-between items-center p-4 translate duration-300"
+        onClick={toggleSubMenu}
+      >
         {data.title}
         {data.isOpen ? (
           <Image
-            className={cn(' aspect-square ', {
+            className={cn('h-[8px] w-[8px]', {
               ['hidden']: data.subMenu?.length === 0,
             })}
-            src="/images/sideMenu/arrowDown.png"
+            src="/images/sideMenu/down-arrow.png"
             alt="arrow-down"
-            height={25}
-            width={25}
+            height={8}
+            width={8}
           />
         ) : (
           <Image
-            className={cn({
+            className={cn('h-[8px] w-[8px] ', {
               ['hidden']: data.subMenu?.length === 0,
             })}
-            src="/images/sideMenu/arrowSide.png"
+            src="/images/sideMenu/right-arrow.png"
             alt="arrow-side"
-            height={15}
-            width={5}
+            height={8}
+            width={8}
           />
         )}
       </div>
 
+      {/* 서브메뉴 리스트 */}
       {data.isOpen && data.subMenu?.length > 0 && (
         <div className="pl-[20px]">
           {item.subMenu.map((subItem: any) => (
