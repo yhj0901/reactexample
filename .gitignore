@@ -38,3 +38,15 @@ next-env.d.ts
 yarn.lock
 
 *storybook.log
+
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
+*.cache
+*.egg-info/
+*.egg
+dist/
+build/
+bin/
