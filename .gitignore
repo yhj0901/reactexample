@@ -53,3 +53,5 @@ bin/
 *.pot
 # 가상환경
 venv/
+# Edgio generated build directory
+.edgio
