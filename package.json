@@ -19,6 +19,10 @@
     "recoil": "^0.7.7"
   },
   "devDependencies": {
+    "@edgio/cli": "^7.11.4",
+    "@edgio/core": "^7.11.4",
+    "@edgio/next": "^7.11.4",
+    "@edgio/prefetch": "^7.11.4",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
@@ -27,10 +31,10 @@
     "eslint-config-next": "13.2.3",
     "eslint-config-prettier": "9.0.0",
     "postcss": "^8",
-    "tailwindcss": "^3.3.0",
-    "typescript": "^5",
     "prettier": "3.0.2",
     "prettier-plugin-organize-imports": "3.2.4",
-    "prettier-plugin-tailwindcss": "0.5.11"    
+    "prettier-plugin-tailwindcss": "0.5.11",
+    "tailwindcss": "^3.3.0",
+    "typescript": "^5"
   }
 }
