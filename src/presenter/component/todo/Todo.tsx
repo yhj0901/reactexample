@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useRecoilState } from 'recoil';
 
-const todoComponent = () => {
+const TodoComponent = () => {
   const router = useRouter();
   const [checkBoxText, setCheckBoxText] = useRecoilState(todoState);
 
@@ -106,4 +106,4 @@ const todoComponent = () => {
   );
 };
 
-export default todoComponent;
+export default TodoComponent;

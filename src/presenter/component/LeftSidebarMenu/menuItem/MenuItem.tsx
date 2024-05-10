@@ -20,6 +20,18 @@ const MenuItem = (props: MenuItemProps) => {
     sessionStorage.getItem('menuData') ?? ''
   );
 
+    // 메뉴 클릭시 메뉴의 isOpen 상태를 변경 후 sessionStorage에 저장
+    const toggleSubMenu = useCallback(() => {
+      updateMenuOpenStatus(menuData, data.id);
+      sessionStorage.setItem('menuData', JSON.stringify(menuData));
+  
+      if (data.link) {
+        // 깜빡임이 있어...
+        router.push(data.link);
+      }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [router, data]);
+
   /**
    * 메뉴의 isOpen 상태를 변경하는 함수
    * id가 같은 메뉴의 isOpen 상태를 변경
@@ -45,16 +57,7 @@ const MenuItem = (props: MenuItemProps) => {
     });
   }
 
-  // 메뉴 클릭시 메뉴의 isOpen 상태를 변경 후 sessionStorage에 저장
-  const toggleSubMenu = useCallback(() => {
-    updateMenuOpenStatus(menuData, data.id);
-    sessionStorage.setItem('menuData', JSON.stringify(menuData));
 
-    if (data.link) {
-      // 깜빡임이 있어...
-      router.push(data.link);
-    }
-  }, [router, data]);
 
   return (
     <div>
@@ -90,8 +93,8 @@ const MenuItem = (props: MenuItemProps) => {
       {/* 서브메뉴 리스트 */}
       {data.isOpen && data.subMenu?.length > 0 && (
         <div className="pl-[20px]">
-          {item.subMenu.map((subItem: any) => (
-            <MenuItem item={subItem} />
+          {item.subMenu.map((subItem: any, key) => (
+            <MenuItem key={key} item={subItem} />
           ))}
         </div>
       )}

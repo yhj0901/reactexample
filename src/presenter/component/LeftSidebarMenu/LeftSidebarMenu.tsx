@@ -1278,8 +1278,8 @@ const LeftSidebarMenu = () => {
       )}
     >
       <nav className="text-base font-semibold">
-        {menus.map((item) => (
-          <MenuItem item={item} />
+        {menus.map((item, key) => (
+          <MenuItem key={key} item={item} />
         ))}
       </nav>
     </div>
