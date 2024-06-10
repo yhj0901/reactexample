@@ -21,14 +21,19 @@ export default function Home() {
         </Link>
       </div>
 
-      <div className=" border-solid border-[1px] bg-red-500 p-[5px] text-center">
+      <div className=" border-solid border-[1px] bg-red-500 p-[5px] mb-[25px] text-center">
         <Link href={'/auth'}>
           <h1>Google 로그인</h1>
         </Link>
       </div>
-      <div className=" border-solid border-[1px] bg-red-500 p-[5px] text-center">
+      <div className=" border-solid border-[1px] bg-red-500 p-[5px] mb-[25px] text-center">
         <Link href={'/auth'}>
           <h1>네이버 로그인</h1>
+        </Link>
+      </div>
+      <div className=" border-solid border-[1px] bg-red-500 p-[5px] text-center">
+        <Link href={'/auth'}>
+          <h1>카카오 로그인</h1>
         </Link>
       </div>
     </div>
