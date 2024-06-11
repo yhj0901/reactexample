@@ -24,6 +24,7 @@ export const config = {
       return token;
     },
   },
+  debug: true,
 } satisfies NextAuthConfig;
 
 export const { handlers, auth, signIn, signOut } = NextAuth(config);
