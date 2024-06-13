@@ -6,6 +6,7 @@ import cn from 'clsx';
 import AuthContext from './context/AuthContext';
 import HeaderNavBar from '@/presenter/component/headerNavBar/HeaderNavBar';
 import LeftSideBarMenu from '@/presenter/component/LeftSidebarMenu/LeftSidebarMenu';
+import { Analytics } from '@vercel/analytics/react';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -25,6 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cn('flex flex-col w-auto h-full justify-center')}>
+        <Analytics />
         <RecoilRootProvider>
           <HeaderNavBar />
           <div className="container flex flex-row">
