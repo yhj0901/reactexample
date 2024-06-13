@@ -24,10 +24,6 @@
     "recoil": "^0.7.7"
   },
   "devDependencies": {
-    "@edgio/cli": "^7.0.15",
-    "@edgio/core": "^7.11.4",
-    "@edgio/next": "^7.11.4",
-    "@edgio/prefetch": "^7.11.4",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
